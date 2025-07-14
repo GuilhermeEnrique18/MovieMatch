@@ -4,12 +4,11 @@ import br.com.moviematch.modelos.Ep;
 import br.com.moviematch.modelos.Movie;
 import br.com.moviematch.modelos.Series;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
-        Movie firstMovie = new Movie();
-
-        firstMovie.setName("Interstellar");
-        firstMovie.setReleaseYear(2014);
+        Movie firstMovie = new Movie("Interstellar", 2014);
         firstMovie.setDurationInMinutes(169);
         System.out.printf("Duração do filme: %d\n",firstMovie.getDurationInMinutes());
         firstMovie.setInPlan(true);
@@ -22,18 +21,14 @@ public class Main {
         System.out.printf("A media de avaliações do filme: %.2f\n",firstMovie.getMedia());
         System.out.printf("Com um total de %d avaliações.\n \n",firstMovie.getTotalEvaluations());
 
-        Series walkingDead = new Series();
-        walkingDead.setName("The Walking Dead");
-        walkingDead.setReleaseYear(2010);
+        Series walkingDead = new Series("The Walking Dead", 2010);
         walkingDead.showTechnicalSheet();
         walkingDead.setSeasons(11);
         walkingDead.setEpsForSeason(13);
         walkingDead.setMinutesForEps(50);
         System.out.printf("Duração para maratonar: %d\n",walkingDead.getDurationInMinutes());
 
-        Movie otherMovie = new Movie();
-        otherMovie.setName("Transformers");
-        otherMovie.setReleaseYear(2007);
+        Movie otherMovie = new Movie("Transformers", 2007);
         otherMovie.setDurationInMinutes(160);
         System.out.printf("Duração do filme: %d\n",firstMovie.getDurationInMinutes());
         otherMovie.setInPlan(true);
@@ -47,13 +42,24 @@ public class Main {
         FilterRecomendations filtering = new FilterRecomendations();
         filtering.filter(firstMovie);
 
-
         Ep ep = new Ep();
         ep.setNumber(1);
         ep.setSerie(walkingDead);
         ep.setTotalViews(300);
         filtering.filter(ep);
 
+        var troia = new Movie("Troia", 2004);
+        troia.setDurationInMinutes(163);
+        troia.evaluate(9.5);
 
+        ArrayList<Movie> movieList = new ArrayList<>();
+        movieList.add(firstMovie);
+        movieList.add(otherMovie);
+        movieList.add(troia);
+
+        System.out.println("Tamanho da lista " + movieList.size());
+        System.out.println("Primeiro filme " + movieList.get(0).getName());
+        System.out.println(movieList);
+        System.out.println("toString do filme " + movieList.get(0).toString());
     }
 }
